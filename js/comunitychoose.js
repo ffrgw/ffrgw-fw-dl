@@ -4,7 +4,8 @@ $(document).ready(function() {
         var communityid = event.layer.feature.properties.community_id
         location.href = 'subauswahl.php?id=' + communityid
     }
-    var map = L.map('map').setView([50.75600670286445, 7.390810699462891], 9.5)
+//    var map = L.map('map').setView([50.75600670286445, 7.390810699462891], 9.5)
+    var map = L.map('map').setView([51.3200, 6.8225], 9)
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/{style}/{z}/{x}/{y}.png', {
              attribution: 'Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap-Mitwirkende</a>, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://carto.com/location-data-services/basemaps">Carto</a>',

@@ -9,6 +9,9 @@ require_once('community-config.inc.php');
 require_once('config.inc.php');
 require_once('ffrouter.class.php');
 $community_id = $_REQUEST['id'];
+if (!isset($community[$community_id]["sub_auswahl"])) {
+	header("Location: firmware.php?id=" . $community_id);
+}
 ?>
 <!DOCTYPE html>
 <html lang="de" xmlns:target="http://www.w3.org/1999/xhtml">
@@ -30,11 +33,6 @@ $community_id = $_REQUEST['id'];
 
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
-	<?php
-		if (!isset($community[$community_id]["sub_auswahl"])) {
-			header("Location: firmware.php?id=" . $community_id);
-		}
-	?>
 </head>
 <body>
 <div class="container z-depth-3" id="outer-container">
@@ -47,19 +45,18 @@ $community_id = $_REQUEST['id'];
 	</header>
 
 	<div class="container row" id="inner-container">
-		<?php for ($i = 0; $i < $err; $i++): ?>
+		<?php if(isset($err)){ for ($i = 0; $i < $err; $i++){ ?>
 			<div class="alert alert-warning alert-dismissible" role="alert">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 				<span class="sr-only">Warning:</span>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<strong>Warning!</strong> <?php echo $error_text[$i] ?>
 			</div>
-		<?php endfor ?>
+		<?php }} ?>
 		<div class="col s12">
-			<h5>Auswahl Stadtteilnetz</h5>
-            <p>Wähle die Firmware 'Soziale Netze' für Freifunk in öffentlichen- und sozialen Einrichtungen</p>
+			<h5>Auswahl Stadtnetz</h5>
 			<select id="stadtteil" onchange="change('stadtteil', this)">
-				<option disabled selected value="">Stadtteilnetz ausw&auml;hlen</option>
+				<option disabled selected value="">Stadtnetz ausw&auml;hlen</option>
 				<?php foreach ($community[$community_id]["sub_auswahl"] as $value): ?>
 					<option value="<?php echo $value ?>"><?php echo $community[$value]['name']?></option>
 				<?php endforeach ?>
@@ -69,7 +66,10 @@ $community_id = $_REQUEST['id'];
 	<footer class="page-footer">
 		<div class="footer-copyright">
 			<div class="container">
-				Licensed under GPLv3 / © 2017 <a class="grey-text text-lighten-4" href="https://labcode.de">Leo Maroni</a>. Dies ist ein Community-Projekt von Freifunk Rhein-Sieg. Alle Firmwares sind Eigenentwicklungen der jeweiligen Communities. <a href="https://www.freifunk-rhein-sieg.net/impressum/" class="grey-text text-lighten-4">Impressum</a>
+				Licensed under GPLv3 / © 2017 <a class="grey-text text-lighten-4" href="https://labcode.de">Leo Maroni</a>.
+				Dies ist ein Community-Projekt von Freifunk Rhein-Sieg.
+				Alle Firmwares sind Eigenentwicklungen der jeweiligen Communities.
+				<a href="https://www.freifunk.ruhr/impressum/" class="grey-text text-lighten-4">Impressum</a>
 			</div>
 		</div>
 	</footer>

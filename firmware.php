@@ -9,6 +9,10 @@ require_once('community-config.inc.php');
 require_once('config.inc.php');
 require_once('ffrouter.class.php');
 $community_id = $_REQUEST['id'];
+if(!empty($community[$community_id]["linktoseite"])) {
+	header("Location: ".$community[$community_id]['linktoseite']);
+	die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="de" xmlns:target="http://www.w3.org/1999/xhtml">
@@ -32,11 +36,8 @@ $community_id = $_REQUEST['id'];
         <link rel="icon" href="favicon.ico" type="image/x-icon">
 
         <?php
-        if($community[$community_id]["linktoseite"] != null) {
-	        header("Location: ".$community[$community_id]['linktoseite']);
-	        die();
-        }
         $firmware_download_path = $community[$community_id]["download_path"];
+        $firmware_download_url = $community[$community_id]["download_url"];
 
         try {
             require_once('ffrouter_parsen.function.php');
@@ -141,13 +142,20 @@ $community_id = $_REQUEST['id'];
                 </div>
                 <div class="col s12 center">
                     <a disabled id="download" class="waves-effect waves-light btn-large"><i class="material-icons left">file_download</i>Herunterladen</a>
-                    <br><span>Passende Kernelmodule bitte seperat laden von <a class="blue-grey-text text-darken-4" href="<?php echo $community[$community_id]['modules_path']?>"><?php echo $community[$community_id]['modules_path']?></a></span>
-                </div>
+<?php
+			if ( isset( $community[$community_id]['modules_path'] ) ) {
+?>                    <br><span>Passende Kernelmodule bitte seperat laden von <a class="blue-grey-text text-darken-4" href="<?php echo $community[$community_id]['modules_path']?>"><?php echo $community[$community_id]['modules_path']?></a></span>
+<?php
+			}
+?>                </div>
             </div>
             <footer class="page-footer">
                 <div class="footer-copyright">
                     <div class="container">
-                        © 2018 <a class="grey-text text-lighten-4" href="https://labcode.de">Leo Maroni</a>, Caspar Armster / Licensed under GPLv3 / Die Router Bilder sind von Daniel Krah und unter <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="grey-text text-lighten-4" target="_blank">Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>  lizensiert. Dies ist ein Community-Projekt von Freifunk Rhein-Sieg. Alle Firmwares sind Eigenentwicklungen der jeweiligen Communities. <a href="https://www.freifunk-rhein-sieg.net/impressum/" class="grey-text text-lighten-4">Impressum</a>
+                        © 2018 <a class="grey-text text-lighten-4" href="https://labcode.de">Leo Maroni</a>, Caspar Armster / Licensed under GPLv3 / Die Router Bilder sind von Daniel Krah und unter <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="grey-text text-lighten-4" target="_blank">Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a> lizensiert.
+                        Dies ist ein Community-Projekt von Freifunk Rhein-Sieg. Alle Firmwares sind Eigenentwicklungen der jeweiligen Communities. <a href="https://www.freifunk-rhein-sieg.net/impressum/" class="grey-text text-lighten-4">Impressum</a>
+						Alle Firmwares sind Eigenentwicklungen der jeweiligen Communities.
+						<a href="https://www.freifunk.ruhr/impressum/" class="grey-text text-lighten-4">Impressum</a>
                     </div>
                 </div>
             </footer>

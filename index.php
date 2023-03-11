@@ -18,7 +18,7 @@ if (count($community) == 1) {
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Freifunk Rhein-Sieg Firmware Downloader</title>
+    <title>Freifunk Ruhrgebiet West Firmware Downloader</title>
 
     <meta name="author" content="Leo Maroni, Caspar Armster" />
 
@@ -39,7 +39,7 @@ if (count($community) == 1) {
 <div class="container z-depth-3" id="outer-container">
     <div id="inner-container">
         <header class="center">
-            <h3 class="thin">Freifunk Rhein-Sieg Firmware Downloader</h3>
+            <h3 class="thin">Freifunk Ruhrgebiet West Firmware Downloader</h3>
         </header>
         <div class="row">
             <h5>W&auml;hle von der Karte: </h5>
@@ -64,19 +64,22 @@ if (count($community) == 1) {
     <footer class="page-footer">
         <div class="footer-copyright">
             <div class="container">
-                © 2017 <a class="grey-text text-lighten-4" href="https://labcode.de">Leo Maroni</a>, Caspar Armster / Licensed under GPLv3. Dies ist ein Community-Projekt von Freifunk Rhein-Sieg. Alle Firmwares sind Eigenentwicklungen der jeweiligen Communities. Direkten Zugriff auf die Firmwares des Freifunk Rhein-Sieg e.V. gibt es auch über <a href="http://images.freifunk-rhein-sieg.net/">images.freifunk-rhein-sieg.net</a>. 
-                <a href="https://freifunk-rhein-sieg.net/impressum/" class="grey-text text-lighten-4">Impressum</a>
+                © 2017 <a class="grey-text text-lighten-4" href="https://labcode.de">Leo Maroni</a>, Caspar Armster / Licensed under GPLv3.
+                Dies ist ein Community-Projekt von Freifunk Rhein-Sieg. Alle Firmwares sind Eigenentwicklungen der jeweiligen Communities. Direkten Zugriff auf die Firmwares des Freifunk Rhein-Sieg e.V. gibt es auch über <a href="http://images.freifunk-rhein-sieg.net/">images.freifunk-rhein-sieg.net</a>.
+				Alle Firmwares sind Eigenentwicklungen der jeweiligen Communities.
+                <a href="https://www.freifunk.ruhr/impressum/" class="grey-text text-lighten-4">Impressum</a>
             </div>
         </div>
     </footer>
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/leaflet.js"></script>
-<script src="js/materialize.min.js"></script><script>
+<script src="js/materialize.min.js"></script>
+<script>
     var communityiesGeoJson = []
-	<?php foreach (array_slice($community, 0) as $i => $value):?>
+	<?php foreach (array_slice($community, 0) as $i => $value){if(!empty($value['geojson'])){?>
     communityiesGeoJson.push({"geojson": "<?php echo $value['geojson'] ?>", "name": "<?php echo $value['name'] ?>"})
-	<?php endforeach ?>
+	<?php }} ?>
 </script>
 <script src="js/comunitychoose.js"></script>
 </body>
